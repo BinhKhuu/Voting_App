@@ -10,42 +10,37 @@ html {
 body {
 	background: var(--main-p1-color);
 	height: 100vh;
+	min-width: 500px;
 	font: 14px 'Roboto', sans-serif;
-}
-.header {
-	background: var(--main-p2-color);
-	height: 50px;
-}
-/*
-.menuLogin {
-	background: var(--main-c3-color);
- 	position: absolute;
-  	top: 50%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
-	text-align: right;
-}*/
-.menuTitle {
-	vertical-align: middle;
-	text-align: center;
-	line-height: 50px;
-	height: 50px;
-	font-size: 25px;
-	color: var(--main-p3-color);
-}
-.voteList {
-	background: var(--main-c1-color);
-	min-height: 400px;
 }
 .footer{
 	background: var(--main-p2-color);
 	height: 50px;
 }
-
-#username {
+.menuFonts {
 	vertical-align: middle;
 	text-align: center;
 	line-height: 50px;
+	font-size: 25px;	
+}
+.itemFonts {
+	vertical-align: middle;
+	text-align: center;
+	line-height: 50px;
+	font-size: 25px;
+}
+/* Menu bar Items*/
+#header {
+	background: var(--main-p2-color);
+	height: 50px;
+	border-radius: 4px 4px 0 0;
+}
+.menuTitle {
+	height: 50px;
+	font-size: 25px;
+	color: var(--main-p3-color);
+}
+#username {
 	height: 50px;
 	font-size: 25px;
 	color: var(--main-p3-color);
@@ -61,6 +56,53 @@ body {
 	color: aqua;
 	outline: none;
 } 
-.dropdownMenu{
+#ddiTwitter:hover {
+	color: #00BFFF;
+	font-weight: bold;
+}
+#ddiTwitter:focus {
+	background: #00BFFF;
+}
+#ddiSignin:hover {
+	color: green;
+	font-weight: bold;
+}
+#ddiSignin:focus {
+	background: green;
+	font-weight: bold;
+}
+#ddiSignup:hover {
+	color: blue;
+	font-weight: bold;
+}
+#ddiSignup:focus {
+	background: blue;
+	font-weight: bold;	
+}
+#dropdownMenu {
 	background: var(--main-p3-color);
 }
+/*end menu bar items */
+
+/* list items */
+.item {
+	background: var(--main-c1-color);
+	font-size: 25px;
+	color: var(--main-p3-color);
+}
+#listContainer {
+	border: 1px solid white;
+	text-align: left;
+}
+#listContainer span {
+	border: 1px solid white;
+	margin-left: 5%;
+}
+#itemNum {
+	border: 1px solid white;
+}
+#voteCount {
+	font-size: 25px;
+	border: 1px solid white;
+}
+/*end list items */
