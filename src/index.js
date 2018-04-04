@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 /*bootstrap.css interferes with index.css*/
-import 'bootstrap/dist/css/bootstrap.css';
+
 import './index.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
@@ -12,6 +12,7 @@ class MainPage extends React.Component {
 		this.toggleDropMenu = this.toggleDropMenu.bind(this);
 		this.state = {
 			dropMenuOpen: false,
+			username: "Guest",
 		};
 	}
 	toggleDropMenu() {
@@ -22,25 +23,26 @@ class MainPage extends React.Component {
 	render() {
 		return (
 			<div class='container'>
+				{/*menubar*/}
 				<div class ="row header">
-					{/*add menubar here*/}
-					<div className="col-10 menuTitle">
-					Title
+					<div className="col-8 menuTitle">
+						Title
 					</div>
-					<div className='col'>
-						<Dropdown direction="left"  className='menuLogin' isOpen={this.state.dropMenuOpen} toggle={this.toggleDropMenu}>
-							<DropdownToggle color="primary" caret>
-							Log in
-							</DropdownToggle>
-							<DropdownMenu right className='dropMenuOptions'>
-								<DropdownItem className="TwitOpt">Twitter</DropdownItem>
-								<DropdownItem divider />
-								<DropdownItem className="accOpt">Account</DropdownItem>
-								<DropdownItem divider />
-								<DropdownItem className="signOpt">Sign up</DropdownItem>
+					<div className="col-2" id="username">
+						{this.state.username}
+					</div>
+					<div className="col-2">
+						<Dropdown direction='bottom' isOpen={this.state.dropMenuOpen} toggle={this.toggleDropMenu}>
+							<DropdownToggle caret id="signin"> login </DropdownToggle>
+							<DropdownMenu right className="dropdownMenu">
+								<DropdownItem>Twitter</DropdownItem>
+								<DropdownItem>Sign In</DropdownItem>
+								<DropdownItem>Sign Up</DropdownItem>
 							</DropdownMenu>
 						</Dropdown>
+
 					</div>
+				{/*end menubar*/}
 				</div>
 				<div className='row voteList'>
 					<div className='col'>

@@ -16,6 +16,7 @@ body {
 	background: var(--main-p2-color);
 	height: 50px;
 }
+/*
 .menuLogin {
 	background: var(--main-c3-color);
  	position: absolute;
@@ -23,15 +24,17 @@ body {
   	left: 50%;
   	transform: translate(-50%, -50%);
 	text-align: right;
-}
-
+}*/
 .menuTitle {
+	vertical-align: middle;
 	text-align: center;
-	font-size: 35px;
+	line-height: 50px;
+	height: 50px;
+	font-size: 25px;
 	color: var(--main-p3-color);
 }
 .voteList {
-	background: var(--main-c2-color);
+	background: var(--main-c1-color);
 	min-height: 400px;
 }
 .footer{
@@ -39,7 +42,25 @@ body {
 	height: 50px;
 }
 
-.dropMenuOptions {
+#username {
+	vertical-align: middle;
 	text-align: center;
-	background: ;
+	line-height: 50px;
+	height: 50px;
+	font-size: 25px;
+	color: var(--main-p3-color);
+}
+#signin {
+	height: 50px;
+	font-size: 25px;
+	color: var(--main-p3-color);
+	background: var(--main-p2-color);
+	border: none;
+}
+#signin:focus {
+	color: aqua;
+	outline: none;
+} 
+.dropdownMenu{
+	background: var(--main-p3-color);
 }
