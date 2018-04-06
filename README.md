@@ -1,3 +1,3 @@
-# Voting_App
-=============
+Voting_App
+===========
 Voting Application
