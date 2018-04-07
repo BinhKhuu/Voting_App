@@ -8,44 +8,56 @@ import { CSSTransition } from 'react-transition-group';
 class NavBar extends React.Component {
 	render() {
 		return (
-			<div className="row">
-				<div className="col" id="menubar">
-					<nav className="navbar navbar-expand-sm navbar-dark justify-content-between">
-							{/*Logo on left side*/}
-				  		<a className="navbar-brand" href="javascript:;">Logo</a>
-				  		{/*toggle button on colapse */}
-					  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> 
-					  			<span class="navbar-toggler-icon"></span>
-					  	</button>
-							<div className="collapse navbar-collapse" id="collapsibleNavbar">
-								{/*options on right side */}
-								<ul className="navbar-nav navbar-right ml-auto">
-									{/*search */}
-									<li className="nav-item">
-										<a className="nav-link" onClick={this.props.toggle}>
-											Search &nbsp;
-											<span className="fa fa-caret-down"></span>
-										</a>
-									</li>
-									{/*username */}
-									<li className="nav-item">
-								    	<a className="nav-link" href="#">username</a>
-								  </li>
-									{/*login dropdown */}
-								  <li className="nav-item dropdown">
-							     	<a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-							        Login
-							      	</a>
-							    	<div className="dropdown-menu dropdown-menu-right">
-							        	<a className="dropdown-item" href="#" id="ddiTwitter">Twitter</a>
-							        	<a className="dropdown-item" href="#" id="ddiSignin">Sign in</a>
-							        	<a className="dropdown-item" href="#" id="ddiSignup">Sign up</a>
-							      </div>
-									</li>
-								</ul>
-							</div>
-					</nav> 
-				</div>
+			<div className="container fixed-top" id="menubar">
+				<nav className="navbar navbar-expand-sm navbar-dark justify-content-between">
+						{/*Logo on left side*/}
+			  		<a className="navbar-brand" href="javascript:;">Logo</a>
+			  		{/*toggle button on colapse */}
+				  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> 
+				  			<span class="navbar-toggler-icon"></span>
+				  	</button>
+						<div className="collapse navbar-collapse" id="collapsibleNavbar">
+							{/*options on right side */}
+							<ul className="navbar-nav navbar-right ml-auto">
+								{/*search */}
+								<li className="nav-item">
+									<a className="nav-link" onClick={this.props.toggle}>
+										Search &nbsp;
+										<span className="fa fa-caret-down"></span>
+									</a>
+								</li>
+								{/*username */}
+								<li className="nav-item">
+							    	<a className="nav-link" href="#">username</a>
+							  </li>
+								{/*login dropdown */}
+							  <li className="nav-item dropdown">
+						     	<a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+						        Login
+						      	</a>
+						    	<div className="dropdown-menu dropdown-menu-right">
+						        	<a className="dropdown-item" href="#" id="ddiTwitter">Twitter</a>
+						        	<a className="dropdown-item" href="#" id="ddiSignin">Sign in</a>
+						        	<a className="dropdown-item" href="#" id="ddiSignup">Sign up</a>
+						      </div>
+								</li>
+							</ul>
+						</div>
+						{/*serchbar toggling*/}
+				</nav> 
+				<CSSTransition 
+					in={this.props.searchbar} 
+					timeout={100}
+					unmountOnExit
+					classNames="slide"
+					onExited= {() => {
+						this.setState({
+							searchbar: false,
+						});
+					}}
+					>
+				<SearchBar />
+				</CSSTransition>
 			</div>
 		)
 	}
@@ -130,20 +142,7 @@ class MainPage extends React.Component {
 	render() {
 		return (
 			<div class='container'>
-				<NavBar toggle={this.toggleSearchBar}/>
-				<CSSTransition 
-					in={this.state.searchbar} 
-					timeout={100}
-					unmountOnExit
-					classNames="slide"
-					onExited= {() => {
-						this.setState({
-							searchbar: false,
-						});
-					}}
-				>
-					<SearchBar />
-				</CSSTransition>
+				<NavBar toggle={this.toggleSearchBar} searchbar={this.state.searchbar}/>
 				<div id="listContainer">
 					<ListItem itemNum={this.state.itemNum} title={this.state.title} votes={this.state.votes} />
 				</div>

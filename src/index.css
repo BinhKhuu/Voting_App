@@ -9,7 +9,7 @@ html {
 body {
 	background: var(--main-p1-color);
 	height: 100vh;
-
+	padding-top: 50px;
 	font: 14px 'Roboto', sans-serif;
 }
 /*serach bar sliding animation */
@@ -104,6 +104,8 @@ body {
 	background: var(--main-p3-color);
 }
 #menubar {
+	max-width: 800px;
+	min-width: 480px;
 	background: var(--main-p2-color);
 }
 #searchbar {
@@ -116,6 +118,7 @@ body {
 	background: var(--main-c1-color);
 	font-size: 25px;
 	color: var(--main-p3-color);
+	height: 1000px;
 }
 #itemTitle {
 	text-align: left;
