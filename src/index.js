@@ -9,18 +9,17 @@ class NavBar extends React.Component {
 	render() {
 		return (
 			<div className="row">
-				<div className="col"id="menubar">
+				<div className="col" id="menubar">
 					<nav className="navbar navbar-expand-sm navbar-dark justify-content-between">
 							{/*Logo on left side*/}
 				  		<a className="navbar-brand" href="javascript:;">Logo</a>
 				  		{/*toggle button on colapse */}
-				  		<div className="navbar-nav">
-					  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> 
+					  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"> 
 					  			<span class="navbar-toggler-icon"></span>
-					  		</button>
+					  	</button>
 							<div className="collapse navbar-collapse" id="collapsibleNavbar">
 								{/*options on right side */}
-								<ul className="navbar-nav">
+								<ul className="navbar-nav navbar-right ml-auto">
 									{/*search */}
 									<li className="nav-item">
 										<a className="nav-link" onClick={this.props.toggle}>
@@ -37,15 +36,14 @@ class NavBar extends React.Component {
 							     	<a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 							        Login
 							      	</a>
-							    	<div className="dropdown-menu">
-							        	<a className="dropdown-item" href="#">Link 1</a>
-							        	<a className="dropdown-item" href="#">Link 2</a>
-							        	<a className="dropdown-item" href="#">Link 3</a>
+							    	<div className="dropdown-menu dropdown-menu-right">
+							        	<a className="dropdown-item" href="#" id="ddiTwitter">Twitter</a>
+							        	<a className="dropdown-item" href="#" id="ddiSignin">Sign in</a>
+							        	<a className="dropdown-item" href="#" id="ddiSignup">Sign up</a>
 							      </div>
 									</li>
 								</ul>
 							</div>
-						</div>
 					</nav> 
 				</div>
 			</div>
@@ -61,9 +59,11 @@ class SearchBar extends React.Component {
 					<nav className="navbar navbar-dark navbar-center navbar-expand-sm">
 						<ul className="navbar-nav ml-auto">
 							<li className="nav-item">
-								<form class="form-inline menuFonts" action="#">
-									<input class="form-control mr-sm-2" size="40" type="text" placeholder="Search" aria-label="Search"></input>
-									<button class="btn btn-outline-success" type="submit">Search</button>
+								<form className="input-group" action="#"> 
+										<input type="text" className="form-control mr-sm-2" size="40" placeholder="Search for..." aria-label="Search"></input>
+										<span className="input-group-btn">
+											<button class="btn btn-secondary" type="submit">Search</button>
+										</span>
 								</form>
 							</li>
 						</ul>
@@ -90,16 +90,21 @@ class ListItem extends React.Component {
 class Footer extends React.Component {
 	render() {
 		return (
-			<div className='row footer menuFonts'>
+			<div className='row footer'>
 				{/*Author */}
-				<div className='col-6'>
-					<p id="author">Binh Khuu</p>
-				</div>	
-				{/*icons on the right */}			
-				<div id="icons" className="col-6">
-					<a href="https://github.com/BinhKhuu/Voting_App" target="_blank"><i id="github" className="fa fa-github" ></i></a>
-					<a href="https://codepen.io/spoonable/#" target="_blank"><i id="codepen" className="fa fa-codepen"></i></a>
-				</div>	
+				<div className="col">
+					<nav className="navbar navbar-dark navbar-expand-sm">
+						<a className="navbar-brand" href="javascript:;" id="author">Binh Khuu</a>
+						<ul className="navbar-nav ml-auto" id="icons">
+							<li className="nav-item">
+								<a href="https://github.com/BinhKhuu/Voting_App" target="_blank"><i id="github" className="fa fa-github" ></i></a>
+							</li>
+							<li className="nav-item">
+								<a href="https://codepen.io/spoonable/#" target="_blank"><i id="codepen" className="fa fa-codepen"></i></a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 			</div>			
 		)
 	}
