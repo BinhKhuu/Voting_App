@@ -6,17 +6,37 @@ html {
 	--main-p3-color: #fcfffc;
 	height: 100vh;
 }
-
 body {
 	background: var(--main-p1-color);
 	height: 100vh;
 
 	font: 14px 'Roboto', sans-serif;
 }
-#container {
-	max-width: 800px;
+/*serach bar sliding animation */
+.slide-enter {
+  opacity: 0.01;
+  transform: scale(1) translateY(-50%);
+}
+.slide-enter-active {
+  opacity: 1;
+  transform: scale(1) translateY(0%);
+  transition: all 150ms ease-out;
+}
+.slide-exit {
+  opacity: 1;
+  transform: scale(1) translateY(0%);
+}
+.slide-exit-active {
+  opacity: 0.01;
+  transform: scale(1) translateY(-50%);
+  transition: all 100ms ease-out;
+}
+/* end search bar sliding animtion*/
+.container {
+    width: 100%;
+    	max-width: 800px;
 	min-width: 480px;
-
+    white-space: nowrap;
 }
 .menuFonts {
 	vertical-align: middle;
@@ -45,11 +65,10 @@ body {
 	color: var(--main-p3-color);
 }
 #signin {
-	margin-left: 47px;
-	font-size: 25px;
+	font-size: 20px;
 	color: var(--main-p3-color);
 	background: var(--main-p2-color);
-	border: none;
+	border: 1px solid black;
 }
 #signin:focus {
 	color: aqua;
@@ -80,6 +99,12 @@ body {
 }
 #dropdownMenu {
 	background: var(--main-p3-color);
+}
+#menubar {
+	background: var(--main-p2-color);
+}
+#searchbar {
+	background: var(--main-p2-color);
 }
 /*end menu bar items */
 
