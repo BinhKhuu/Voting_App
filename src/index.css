@@ -118,7 +118,7 @@ body {
 	background: var(--main-c1-color);
 	font-size: 25px;
 	color: var(--main-p3-color);
-	height: 1000px;
+	height: 50px;
 }
 #itemTitle {
 	text-align: left;
