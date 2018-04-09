@@ -137,7 +137,10 @@ class MainPage extends React.Component {
 	toggleSearchBar(){
 		this.setState({
 			searchbar: !this.state.searchbar,
-		})
+		},()=> {
+			if(this.state.searchbar) document.body.classList.add("bodyPadding");
+			if(!this.state.searchbar) document.body.classList.remove("bodyPadding");
+		});
 	}
 	render() {
 		return (

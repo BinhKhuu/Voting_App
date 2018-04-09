@@ -12,6 +12,9 @@ body {
 	padding-top: 50px;
 	font: 14px 'Roboto', sans-serif;
 }
+.bodyPadding {
+	padding-top: 102px;
+}
 /*serach bar sliding animation */
 .slide-enter {
   	opacity: 0.3;
