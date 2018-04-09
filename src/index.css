@@ -12,8 +12,17 @@ body {
 	padding-top: 50px;
 	font: 14px 'Roboto', sans-serif;
 }
-.bodyPadding {
+.bodyPaddingReg {
+	padding-top: 50px;
+}
+.bodyPaddingLG {
 	padding-top: 102px;
+}
+.bodyPaddingSM {
+	padding-top: 150px;
+}
+.bodyPaddingSMSearch {
+	padding-top: 200px;
 }
 /*serach bar sliding animation */
 .slide-enter {
@@ -27,15 +36,15 @@ body {
   	transition: all 300ms ease-out;
 }
 .slide-exit {
-  	opacity: 0.1;
-  	transform: scale(0.8) translateY(-10%);
+  	opacity: 1;
+  	transform:  translateY(0%);
+  	transition: 2s cubic-bezier(0.1,0.7,1.0,0.1);
 
 }
 .slide-exit-active {
-	opacity: 0.01;
-	transform: scale(0.5) translateY(-130%);
-	transition-timing-function: ease-in;
-	transition: 0.3s;
+  	opacity: 0.001;
+  	transform: scale(1) translateY(-50%);
+  	transition: all 400ms ease-in;
 }
 
 /* end search bar sliding animtion*/
@@ -118,6 +127,7 @@ body {
 
 /* list items */
 .item {
+	border:1px solid var(--main-c2-color);
 	background: var(--main-c1-color);
 	font-size: 25px;
 	color: var(--main-p3-color);
