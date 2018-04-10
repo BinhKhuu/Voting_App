@@ -4,6 +4,7 @@ html {
 	--main-c1-color: #248232;
 	--main-c2-color: #2ba84a;
 	--main-p3-color: #fcfffc;
+	--main-menuFont: #A0A3A0;
 	height: 100vh;
 }
 body {
@@ -50,15 +51,13 @@ body {
 /* end search bar sliding animtion*/
 .container {
     width: 100%;
-    	max-width: 800px;
+    max-width: 800px;
 	min-width: 480px;
     white-space: nowrap;
 }
 .menuFonts {
-	vertical-align: middle;
-	text-align: center;
-	line-height: 50px;
-	font-size: 25px;	
+	color: var(--main-menuFont) !important;
+	font-size: 15px;	
 }
 .itemFonts {
 	vertical-align: middle;
@@ -73,7 +72,7 @@ body {
 }
 .menuTitle {
 	font-size: 25px;
-	color: var(--main-p3-color);
+	color: var(--main-menuFont);
 }
 #username {
 	font-size: 25px;

@@ -10,11 +10,11 @@ class Header extends React.Component {
 	render(){
 		return(
 			<div className="container fixed-top" id="menubar">
-				<Navbar color="faded" light>
+				<Navbar color="faded" dark>
 					<NavbarBrand href="/" className="mr-auto">Logo</NavbarBrand>
-						<Nav>
+						<Nav className="menuFonts">
 							<NavItem>
-								<NavLink onClick={this.props.toggleSearchBar}>Search</NavLink>
+								<NavLink onClick={this.props.toggleSearchBar}>Search &nbsp;<span className="fa fa-caret-down"></span></NavLink>
 							</NavItem>
 							<NavItem>
 								<NavLink>username</NavLink>
@@ -24,7 +24,7 @@ class Header extends React.Component {
 							</NavItem>
 						</Nav>
 				</Navbar>
-								{/*aninmate and render searchbar*/}
+				{/*aninmate and render searchbar*/}
 				<CSSTransition 
 					in={this.props.searchbar} 
 					timeout={400}
@@ -41,7 +41,6 @@ class Header extends React.Component {
 							else {
 								document.body.classList.remove("bodyPaddingSMSearch");
 							}
-
 						});
 					}}
 					>
@@ -56,13 +55,13 @@ class HeaderCollapse extends React.Component {
 	render(){
 		return(
 			<div className="container fixed-top" id="menubar">
-				<Navbar color="faded" light>
+				<Navbar color="faded" dark>
 					<NavbarBrand href="/" className="mr-auto">Logo</NavbarBrand>
 					<NavbarToggler onClick={this.props.toggle} className="mr-2" />
-					<Collapse isOpen={this.props.collapseOpen} navbar >
-						<Nav navbar>
+					<Collapse isOpen={this.props.collapseOpen} navbar>
+						<Nav className="menuFonts" navbar>
 							<NavItem>
-								<NavLink onClick={this.props.toggleSearchBar}>Search</NavLink>
+								<NavLink onClick={this.props.toggleSearchBar}>Search &nbsp;<span className="fa fa-caret-down"></span></NavLink>
 							</NavItem>
 							<NavItem>
 								<NavLink>username</NavLink>
@@ -90,7 +89,6 @@ class HeaderCollapse extends React.Component {
 							else {
 								document.body.classList.remove("bodyPaddingSMSearch");
 							}
-
 						});
 					}}
 					>
@@ -223,12 +221,31 @@ class MainPage extends React.Component {
 	render() {
 		return (
 			<div class='container'>
-				{/*<NavBar toggle={this.toggleSearchBar} searchbar={this.state.searchbar} collapseOpen={this.state.collapseOpen} collapseBtn={this.collapseBtnPress}/>*/}
-				{window.innerWidth > 600 && <Header toggle={this.collapseBtnPress} collapseOpen={this.state.collapseOpen} toggleSearchBar={this.toggleSearchBar} searchbar={this.state.searchbar} /> }
-				{window.innerWidth < 600 && <HeaderCollapse toggle={this.collapseBtnPress} collapseOpen={this.state.collapseOpen} toggleSearchBar={this.toggleSearchBar} searchbar={this.state.searchbar} />}
+				{	window.innerWidth > 600 && <Header 
+															toggle={this.collapseBtnPress} 
+															collapseOpen={this.state.collapseOpen} 
+															toggleSearchBar={this.toggleSearchBar} 
+															searchbar={this.state.searchbar} 
+														/> 
+				}
+				{	window.innerWidth < 600 && <HeaderCollapse 
+															toggle={this.collapseBtnPress} 
+															collapseOpen={this.state.collapseOpen} 
+															toggleSearchBar={this.toggleSearchBar} 
+															searchbar={this.state.searchbar} 
+														/>
+				}
 				<div id="listContainer">
-					<ListItem itemNum={this.state.itemNum} title={this.state.title} votes={this.state.votes} />
-					<ListItem itemNum={this.state.itemNum} title={this.state.title} votes={this.state.votes} />
+					<ListItem 
+						itemNum={this.state.itemNum} 
+						title={this.state.title} 
+						votes={this.state.votes} 
+					/>
+					<ListItem 
+						itemNum={this.state.itemNum} 
+						title={this.state.title} 
+						votes={this.state.votes} 
+					/>
 				</div>
 				<Footer />			
 			</div>
