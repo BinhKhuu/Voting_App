@@ -2,144 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 /*bootstrap.css interferes with index.css*/
 import './index.css';
-import { ButtonDropdown,Dropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledDropdown, InputGroup, InputGroupAddon, Input } from 'reactstrap';
-import { CSSTransition } from 'react-transition-group';
-import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Button, Form, FormGroup} from "reactstrap";
-import {Modal, ModalHeader, ModalBody, ModalFooter, Label, Col } from "reactstrap";
-class Header extends React.Component {
-	render(){
-		return(
-			<div className="container fixed-top" id="menubar">
-				<Navbar color="faded" dark>
-					<NavbarBrand href="/" className="mr-auto">Logo</NavbarBrand>
-					<Nav className="menuFonts">
-						<NavItem className="menuSearch">
-							<NavLink 
-								onClick={this.props.toggleSearchBar}
-							> Search &nbsp;<span className="fa fa-caret-down"></span>
-							</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink>username</NavLink>
-						</NavItem>
-						<Dropdown 
-							isOpen={this.props.dropOpen} 
-							toggle={this.props.toggleDropdown}
-							nav
-						>
-	                	<DropdownToggle className="menuFonts" nav caret>Log In</DropdownToggle>
-	                	<DropdownMenu right>
-		                  <DropdownItem id="ddiTwitter">Twitter</DropdownItem>
-		                  <DropdownItem onClick={this.props.toggleSignIn} id="ddiSignin">Sign In</DropdownItem>
-		                  <DropdownItem id="ddiSignup">SignUP</DropdownItem>
-	               	</DropdownMenu>
-	              	</Dropdown>
-					</Nav>
-				</Navbar>
-				{/*aninmate and render searchbar*/}
-				<CSSTransition 
-					in={this.props.searchbar} 
-					timeout={400}
-					unmountOnExit
-					classNames="slide"
-					/*remove padding in the body to align content*/
-					onExited= {() => {
-						this.setState({
-							searchbar: false,
-						},()=>{
-							if(window.innerWidth > 600){
-						 		document.body.classList.remove("bodyPaddingLG");		
-							}
-							else {
-								document.body.classList.remove("bodyPaddingSMSearch");
-							}
-						});
-					}}
-					>
-				<Searchbar />
-				</CSSTransition>
-			</div>
-		);
-	}
-}
-
-class HeaderCollapse extends React.Component {
-	render(){
-		return(
-			<div className="container fixed-top" id="menubar">
-				<Navbar color="faded" dark>
-					<NavbarBrand href="/" className="mr-auto">Logo</NavbarBrand>
-					<NavbarToggler onClick={this.props.toggle} className="mr-2" />
-					<Collapse isOpen={this.props.collapseOpen} navbar>
-						<Nav className="menuFonts" navbar>
-							<NavItem className="menuSearch">
-								<NavLink onClick={this.props.toggleSearchBar}>Search &nbsp;<span className="fa fa-caret-down"></span></NavLink>
-							</NavItem>
-							<NavItem>
-								<NavLink>username</NavLink>
-							</NavItem>
-							<Dropdown 
-								isOpen={this.props.dropOpen} 
-								toggle={this.props.toggleDropdown}
-								nav
-							>
-		                	<DropdownToggle className="menuFonts" nav caret>Log In</DropdownToggle>
-		                	<DropdownMenu right>
-			                  <DropdownItem id="ddiTwitter">Twitter</DropdownItem>
-			                  <DropdownItem onClick={this.props.toggleSignIn} id="ddiSignin">Sign In</DropdownItem>
-			                  <DropdownItem id="ddiSignup">SignUP</DropdownItem>
-		               	</DropdownMenu>
-		              	</Dropdown>
-						</Nav>
-					</Collapse>
-				</Navbar>
-								{/*aninmate and render searchbar*/}
-				<CSSTransition 
-					in={this.props.searchbar} 
-					timeout={400}
-					unmountOnExit
-					classNames="slide"
-					/*remove padding in the body to align content*/
-					onExited= {() => {
-						this.setState({
-							searchbar: false,
-						},()=>{
-							if(window.innerWidth > 600){
-						 		document.body.classList.remove("bodyPaddingLG");		
-							}
-							else {
-								document.body.classList.remove("bodyPaddingSMSearch");
-							}
-						});
-					}}
-					>
-				<Searchbar />
-				</CSSTransition>
-			</div>
-		)
-	}
-}
-
-class Searchbar extends React.Component {
-	render() {
-		return(
-			<div className="row" id="searchbar">
-				<div className="col">
-					<Navbar>
-						<Nav className="ml-auto">
-							<NavItem>		
-					        	<InputGroup>
-					        		<Input type="text" size="40" placeholder="search..."/>
-					          	<InputGroupAddon addonType="append"><Button type="submit">Search</Button></InputGroupAddon> 
-					        	</InputGroup>
-							</NavItem>
-						</Nav>
-					</Navbar>
-				</div>
-			</div>
-		)
-	}
-}
+import {SignInModal, SignUpModal} from "./voting_modal.js";
+import {Header, HeaderCollapse, Footer} from "./voting_navbar.js";
 
 class ListItem extends React.Component {
 	render() {
@@ -153,59 +17,6 @@ class ListItem extends React.Component {
 	}
 }
 
-class SignInModal extends React.Component {
-	render(){
-		return (
-			<div>
-				<Modal isOpen={this.props.isOpen} toggle={this.props.toggleSignIn}>
-					<ModalHeader toggle={this.props.toggleSignIn}>Sign In</ModalHeader>
-					<ModalBody>
-						<Form action="#soon">
-							<FormGroup>
-									<InputGroup>
-									<InputGroupAddon addonType="prepend">
-										Email
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									</InputGroupAddon>
-						        		<Input type="text" placeholder="Someone@email.com"/>	 
-						        	</InputGroup>
-							</FormGroup>
-							<FormGroup>
-									<InputGroup>
-									<InputGroupAddon addonType="prepend">Password</InputGroupAddon>
-						        		<Input type="text" placeholder="******"/>	 
-						        	</InputGroup>
-							</FormGroup>
-						</Form>
-					</ModalBody>
-					<ModalFooter>
-						<Button color="success" type="submit">Sign In</Button>
-						<Button color="secondary">Sign Up</Button>
-					</ModalFooter>
-				</Modal>
-			</div>
-		)
-	}
-}
-
-class Footer extends React.Component {
-	render() {
-		return (
-			<div className="row footer">
-				<div className="col">
-					<Navbar>
-						<NavbarBrand className="mr-auto" id="author">Binh Khuu</NavbarBrand>	
-						<Nav id="icons">
-							<NavLink href="https://github.com/BinhKhuu/Voting_App" target="_blank"><i id="github" className="fa fa-github"></i></NavLink>
-							<NavLink href="https://codepen.io/spoonable/#" target="_blank" ><i id="codepen" className="fa fa-codepen"></i></NavLink>
-						</Nav>
-					</Navbar>
-				</div>
-			</div>
-		)
-	}
-}
-
 class MainPage extends React.Component {
 	constructor(props) {
 		super(props);
@@ -214,6 +25,7 @@ class MainPage extends React.Component {
 			searchbar: false,
 			collapseOpen: false,
 			signInModal: false,
+			signUpModal: false,
 			username: "Guest",
 			title: "Title",
 			votes: 0,
@@ -221,6 +33,7 @@ class MainPage extends React.Component {
 		};
 		this.toggleSearchBar = this.toggleSearchBar.bind(this);
 		this.toggleSignIn = this.toggleSignIn.bind(this);
+		this.toggleSignUp = this.toggleSignUp.bind(this);
 		this.updateDimensions = this.updateDimensions.bind(this);
 		this.collapseBtnPress = this.collapseBtnPress.bind(this);
 		this.toggleDropdown = this.toggleDropdown.bind(this);
@@ -286,23 +99,31 @@ class MainPage extends React.Component {
 	toggleSignIn(){
 		this.setState({
 			signInModal: !this.state.signInModal,
+			signUpModal: false,
+		});
+	}
+	toggleSignUp(){
+		this.setState({
+			signUpModal: !this.state.signUpModal,
+			signInModal: false,
 		});
 	}
 	render() {
 		return (
-			<div class='container'>
-				{	window.innerWidth > 600 && <Header 
-															toggleSignIn={this.toggleSignIn}
+			<div className='container'>
+				{	window.innerWidth > 600 && <Header 														
 															dropOpen={this.state.menuDropdown}
 															toggleDropdown={this.toggleDropdown}
-
 															collapseOpen={this.state.collapseOpen} 
 															toggleSearchBar={this.toggleSearchBar} 
+															toggleSignIn={this.toggleSignIn}
+															toggleSignUp={this.toggleSignUp}
 															searchbar={this.state.searchbar} 
 														/> 
 				}
 				{	window.innerWidth < 600 && <HeaderCollapse 
 															toggleSignIn={this.toggleSignIn}
+															toggleSignUp={this.toggleSignUp}
 															dropOpen={this.state.menuDropdown}
 															toggleDropdown={this.toggleDropdown}
 															toggle={this.collapseBtnPress} 
@@ -325,6 +146,12 @@ class MainPage extends React.Component {
 				</div>
 				<SignInModal 
 					isOpen={this.state.signInModal}
+					toggleSignIn={this.toggleSignIn}
+					toggleSignUp={this.toggleSignUp}
+				/>
+				<SignUpModal 
+					isOpen={this.state.signUpModal}
+					toggleSignUp={this.toggleSignUp}
 					toggleSignIn={this.toggleSignIn}
 				/>
 				<Footer />			
