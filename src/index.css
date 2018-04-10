@@ -74,6 +74,10 @@ body {
 	font-size: 25px;
 	color: var(--main-menuFont);
 }
+.menuSearch:hover {
+	color: var(--main-p3-color);
+	cursor: pointer;
+}
 #username {
 	font-size: 25px;
 	color: var(--main-p3-color);
@@ -173,3 +177,14 @@ body {
 }
 /* end footer */
 
+/*Modal Styles*/
+.modalHeader {
+	    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+
+/* end Modal Styles*/
