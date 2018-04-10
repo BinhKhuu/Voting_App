@@ -2,77 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 /*bootstrap.css interferes with index.css*/
 import './index.css';
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { CSSTransition } from 'react-transition-group';
-import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink} from "reactstrap";
-
-class NavBar extends React.Component {
-	render() {
-		return (
-			<div className="container fixed-top" id="menubar">
-				<nav className="navbar navbar-expand-sm navbar-dark justify-content-between">
-						{/*Logo on left side*/}
-			  		<a className="navbar-brand" href="javascript:;">Logo</a>
-			  		{/*toggle button on colapse */}
-				  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" onClick={this.props.collapseBtn}> 
-				  			<span class="navbar-toggler-icon"></span>
-				  	</button>
-						<div className="collapse navbar-collapse" id="collapsibleNavbar">
-							{/*options on right side */}
-							<ul className="navbar-nav navbar-right ml-auto">
-								{/*search */}
-								<li className="nav-item">
-									<a className="nav-link" onClick={this.props.toggle}>
-										Search &nbsp;
-										<span className="fa fa-caret-down"></span>
-									</a>
-								</li>
-								{/*username */}
-								<li className="nav-item">
-							    	<a className="nav-link" href="#">username</a>
-							  </li>
-								{/*login dropdown */}
-							  <li className="nav-item dropdown">
-						     	<a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-						        Login
-						      	</a>
-						    	<div className="dropdown-menu dropdown-menu-right">
-						        	<a className="dropdown-item" href="#" id="ddiTwitter">Twitter</a>
-						        	<a className="dropdown-item" href="#" id="ddiSignin">Sign in</a>
-						        	<a className="dropdown-item" href="#" id="ddiSignup">Sign up</a>
-						      </div>
-								</li>
-							</ul>
-						</div>
-						{/*serchbar toggling*/}
-				</nav> 
-				{/*aninmate and render searchbar*/}
-				<CSSTransition 
-					in={this.props.searchbar} 
-					timeout={400}
-					unmountOnExit
-					classNames="slide"
-					/*remove padding in the body to align content*/
-					onExited= {() => {
-						this.setState({
-							searchbar: false,
-						},()=>{
-							if(window.innerWidth > 600){
-						 		document.body.classList.remove("bodyPaddingLG");		
-							}
-							else {
-								document.body.classList.remove("bodyPaddingSMSearch");
-							}
-
-						});
-					}}
-					>
-				<SearchBar />
-				</CSSTransition>
-			</div>
-		)
-	}
-}
+import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Button, Form, FormGroup} from "reactstrap";
 
 class Header extends React.Component {
 	render(){
@@ -113,7 +45,7 @@ class Header extends React.Component {
 						});
 					}}
 					>
-				<SearchBar />
+				<Searchbar />
 				</CSSTransition>
 			</div>
 		);
@@ -162,36 +94,33 @@ class HeaderCollapse extends React.Component {
 						});
 					}}
 					>
-				<SearchBar />
+				<Searchbar />
 				</CSSTransition>
 			</div>
 		)
 	}
 }
 
-class SearchBar extends React.Component {
-	render(){
+class Searchbar extends React.Component {
+	render() {
 		return(
 			<div className="row" id="searchbar">
 				<div className="col">
-					<nav className="navbar navbar-dark navbar-center navbar-expand-sm">
-						<ul className="navbar-nav ml-auto">
-							<li className="nav-item">
-								<form className="input-group" action="#"> 
-										<input type="text" className="form-control mr-sm-2" size="40" placeholder="Search for..." aria-label="Search"></input>
-										<span className="input-group-btn">
-											<button class="btn btn-secondary" type="submit">Search</button>
-										</span>
-								</form>
-							</li>
-						</ul>
-					</nav>
+					<Navbar>
+						<Nav className="ml-auto">
+							<NavItem>		
+					        <InputGroup>
+					        	<Input type="text" size="40" placeholder="search..."/>
+					          <InputGroupAddon addonType="append"><Button type="submit">Search</Button></InputGroupAddon> 
+					        </InputGroup>
+							</NavItem>
+						</Nav>
+					</Navbar>
 				</div>
 			</div>
 		)
 	}
 }
-
 
 class ListItem extends React.Component {
 	render() {
@@ -208,22 +137,17 @@ class ListItem extends React.Component {
 class Footer extends React.Component {
 	render() {
 		return (
-			<div className='row footer'>
-				{/*Author */}
+			<div className="row footer">
 				<div className="col">
-					<nav className="navbar navbar-dark navbar-expand-sm">
-						<a className="navbar-brand" href="javascript:;" id="author">Binh Khuu</a>
-						<ul className="navbar-nav ml-auto" id="icons">
-							<li className="nav-item">
-								<a href="https://github.com/BinhKhuu/Voting_App" target="_blank"><i id="github" className="fa fa-github" ></i></a>
-							</li>
-							<li className="nav-item">
-								<a href="https://codepen.io/spoonable/#" target="_blank"><i id="codepen" className="fa fa-codepen"></i></a>
-							</li>
-						</ul>
-					</nav>
+					<Navbar>
+						<NavbarBrand className="mr-auto" id="author">Binh Khuu</NavbarBrand>	
+						<Nav id="icons">
+							<NavLink href="https://github.com/BinhKhuu/Voting_App" target="_blank"><i id="github" className="fa fa-github"></i></NavLink>
+							<NavLink href="https://codepen.io/spoonable/#" target="_blank" ><i id="codepen" className="fa fa-codepen"></i></NavLink>
+						</Nav>
+					</Navbar>
 				</div>
-			</div>			
+			</div>
 		)
 	}
 }
@@ -295,24 +219,6 @@ class MainPage extends React.Component {
 				else document.body.className = "bodyPaddingSM";
 			});
 		}
-
-
-		/*
-		this.setState({
-			collapseOpen: !this.state.collapseOpen,
-		},function() {
-			if(!this.state.collapseOpen){
-				if(!this.state.searchbar) document.body.className = "";
-				else {
-					document.body.className = "";
-					this.setState({
-						searchbar: false,
-					});
-				}
-			} 
-			if(this.state.collapseOpen) document.body.className = "bodyPaddingSM";
-		});*/
-		
 	}
 	render() {
 		return (

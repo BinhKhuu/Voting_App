@@ -116,7 +116,6 @@ body {
 	background: var(--main-p3-color);
 }
 #menubar {
-	max-width: 800px;
 	min-width: 480px;
 	background: var(--main-p2-color);
 }
@@ -160,16 +159,11 @@ body {
 #icons a {
 	color: inherit;
 }
-#github {
-	
-	margin-right: 6px;
-}
+
 #github:hover {
 	color: yellow;
 }
-#codepen{
-	margin-left: 6px;
-}
+
 #codepen:hover {
 	color: yellow;
 }
