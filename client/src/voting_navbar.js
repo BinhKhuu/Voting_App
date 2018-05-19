@@ -1,162 +1,144 @@
 import React from 'react';
+import './index.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { CSSTransition } from 'react-transition-group';
 import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Button} from "reactstrap";
+import {HeaderCollapse, Header} from './navbar_elements.js';
 
-
-export class Header extends React.Component {
-	render(){
-		return(
-			<div className="container fixed-top" id="menubar">
-				<div className="col">
-					<Navbar color="faded" dark>
-						<NavbarBrand href="/" className="mr-auto">Logo</NavbarBrand>
-						<Nav className="menuFonts">
-							<NavItem className="menuSearch">
-								<NavLink 
-									onClick={this.props.toggleSearchBar}
-								> Search &nbsp;<span className="fa fa-caret-down"></span>
-								</NavLink>
-							</NavItem>
-							<NavItem>
-								<NavLink>username</NavLink>
-							</NavItem>
-							<Dropdown 
-								isOpen={this.props.dropOpen} 
-								toggle={this.props.toggleDropdown}
-								nav
-							>
-		                	<DropdownToggle className="menuFonts" nav caret>Log In</DropdownToggle>
-		                	<DropdownMenu right>
-			                  <DropdownItem id="ddiTwitter">Twitter</DropdownItem>
-			                  <DropdownItem onClick={this.props.toggleSignIn} id="ddiSignin">Sign In</DropdownItem>
-			                  <DropdownItem onClick={this.props.toggleSignUp} id="ddiSignup">SignUP</DropdownItem>
-		               	</DropdownMenu>
-		              	</Dropdown>
-						</Nav>
-					</Navbar>
-				</div>
-				{/*aninmate and render searchbar*/}
-				<CSSTransition 
-					in={this.props.searchbar} 
-					timeout={400}
-					unmountOnExit
-					classNames="slide"
-					/*remove padding in the body to align content*/
-					onExited= {() => {
-						this.setState({
-							searchbar: false,
-						},()=>{
-							if(window.innerWidth > 600){
-						 		document.body.classList.remove("bodyPaddingLG");		
-							}
-							else {
-								document.body.classList.remove("bodyPaddingSMSearch");
-							}
-						});
-					}}
-					>
-				<Searchbar />
-				</CSSTransition>
-			</div>
-		);
+export class Menubar extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			searchbar: false,
+			collapseOpen: false,
+			loginMenuOpen: false,
+		}
+		this.toggleSearchBar = this.toggleSearchBar.bind(this);
+		this.updateDimensions = this.updateDimensions.bind(this);
+		this.toggleLoginMenuOpen = this.toggleLoginMenuOpen.bind(this);
+		this.collapseBtnPress = this.collapseBtnPress.bind(this);
 	}
-}
 
-export class HeaderCollapse extends React.Component {
-	render(){
-		return(
-			<div className="container fixed-top" id="menubar">
-				<div className="col">
-					<Navbar color="faded" dark>
-						<NavbarBrand href="/" className="mr-auto">Logo</NavbarBrand>
-						<NavbarToggler onClick={this.props.toggle} className="mr-2" />
-						<Collapse isOpen={this.props.collapseOpen} navbar>
-							<Nav className="menuFonts" navbar>
-								<NavItem className="menuSearch">
-									<NavLink onClick={this.props.toggleSearchBar}>Search &nbsp;<span className="fa fa-caret-down"></span></NavLink>
-								</NavItem>
-								<NavItem>
-									<NavLink>username</NavLink>
-								</NavItem>
-								<Dropdown 
-									isOpen={this.props.dropOpen} 
-									toggle={this.props.toggleDropdown}
-									nav
-								>
-			                	<DropdownToggle className="menuFonts" nav caret>Log In</DropdownToggle>
-			                	<DropdownMenu right>
-				                  <DropdownItem id="ddiTwitter">Twitter</DropdownItem>
-				                  <DropdownItem onClick={this.props.toggleSignIn} id="ddiSignin">Sign In</DropdownItem>
-				                  <DropdownItem onClick={this.props.toggleSignUp} id="ddiSignup">SignUP</DropdownItem>
-			               	</DropdownMenu>
-			              	</Dropdown>
-							</Nav>
-						</Collapse>
-					</Navbar>
-				</div>
-				{/*aninmate and render searchbar*/}
-				<CSSTransition 
-					in={this.props.searchbar} 
-					timeout={400}
-					unmountOnExit
-					classNames="slide"
-					/*remove padding in the body to align content*/
-					onExited= {() => {
-						this.setState({
-							searchbar: false,
-						},()=>{
-							if(window.innerWidth > 600){
-						 		document.body.classList.remove("bodyPaddingLG");		
-							}
-							else {
-								document.body.classList.remove("bodyPaddingSMSearch");
-							}
-						});
-					}}
-					>
-				<Searchbar />
-				</CSSTransition>
-			</div>
-		)
+	componentDidMount() {
+		window.addEventListener('resize', this.updateDimensions);
 	}
-}
 
-export class Searchbar extends React.Component {
-	render() {
-		return(
-			<div className="row" id="searchbar">
-				<div className="col">
-					<Navbar>
-						<Nav className="ml-auto">
-							<NavItem>		
-					        	<InputGroup>
-					        		<Input type="text" size="40" placeholder="search..."/>
-					          	<InputGroupAddon addonType="append"><Button type="submit">Search</Button></InputGroupAddon> 
-					        	</InputGroup>
-							</NavItem>
-						</Nav>
-					</Navbar>
-				</div>
-			</div>
-		)
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.updateDimensions);
 	}
-}
 
-export class Footer extends React.Component {
+	/* Toggler for search bar
+	 * updates searchbar state between false and true
+	 */
+	toggleSearchBar(){
+		this.setState({
+			searchbar: !this.state.searchbar,
+		},function() {
+			/*add pading to body to align content*/	
+			if(this.state.searchbar && window.innerWidth > 600) document.body.classList.add("bodyPaddingLG");
+			if(this.state.searchbar && window.innerWidth < 600) document.body.classList.add("bodyPaddingSMSearch");
+			//searchbar not showing is handled in CSSTranslation onExit() in navBar
+		});
+	}
+
+	/* changes navigation bar when window is resized	
+	 *	600 > is full menu
+	 *  600 =< is mobile collapsed view
+	 */
+	updateDimensions() {
+		//full view
+		if(window.innerWidth > 600) {
+			this.setState({
+				searchbar: false,
+				collapseOpen: false,
+				loginMenuOpen: false,
+			},()=>{
+				document.body.className = "";
+			});
+		}
+		//collapsed view
+		if(window.innerWidth < 600) {
+			this.setState({
+				searchbar: false,
+				collapseOpen: false,
+			},()=>{
+				document.body.className = "";
+			});
+		}
+
+	}
+	/* Log In menu toggler 
+	 * toggles the Log In option
+	 * updates loginMenuOpen
+	 */
+	toggleLoginMenuOpen(){
+		this.setState({
+			loginMenuOpen: !this.state.loginMenuOpen,
+		});
+	}
+	/*	collapse menu button handler
+	 * toggles between open and close states
+	 * updates collapseOpen varaible
+	 */
+	collapseBtnPress(){
+		//open
+		if(this.state.collapseOpen) {
+			document.body.className = "";
+			this.setState({
+				collapseOpen: !this.state.collapseOpen,
+				searchbar: false,
+			});
+		}
+		//close
+		else {
+			this.setState({
+				collapseOpen: !this.state.collapseOpen,
+			},function() {
+				if(!this.state.collapseOpen)document.body.className = "";
+				else document.body.className = "bodyPaddingSM";
+			});
+		}
+	}
+
 	render() {
 		return (
-			<div className="row footer">
-				<div className="col">
-					<Navbar>
-						<NavbarBrand className="mr-auto" id="author">Binh Khuu</NavbarBrand>	
-						<Nav id="icons">
-							<NavLink href="https://github.com/BinhKhuu/Voting_App" target="_blank"><i id="github" className="fa fa-github"></i></NavLink>
-							<NavLink href="https://codepen.io/spoonable/#" target="_blank" ><i id="codepen" className="fa fa-codepen"></i></NavLink>
-						</Nav>
-					</Navbar>
+				<div>
+					{ window.innerWidth > 600 &&						
+						<Header 
+							username={this.props.username}		
+							//drop down options for login option
+							//twitter, login, sign up												
+							loginMenuOpen={this.state.loginMenuOpen}
+							toggleLoginMenuOpen={this.toggleLoginMenuOpen}
+							toggleSignIn={this.props.toggleSignIn}
+							toggleSignUp={this.props.toggleSignUp}
+							//searchbar toggler
+							searchbar={this.state.searchbar} 
+							toggleSearchBar={this.toggleSearchBar}
+						/> 
+					}
+					
+					{
+						window.innerWidth < 600 && 
+						<HeaderCollapse 
+							username={this.props.username}
+							//drop down menu for log In options
+							//twitter, login, sign up														
+							toggleLoginMenuOpen={this.toggleLoginMenuOpen}
+							
+							toggleSignIn={this.props.toggleSignIn}
+							toggleSignUp={this.props.toggleSignUp}
+							//searchbar toggler
+							searchbar={this.state.searchbar} 
+							toggleSearchBar={this.toggleSearchBar} 
+							loginMenuOpen={this.state.loginMenuOpen}
+							//collapse btn toggler 	
+							collapseOpen={this.state.collapseOpen} 
+							collapseBtnPress={this.collapseBtnPress}
+
+						/>
+					}
 				</div>
-			</div>
-		)
+		);
 	}
 }
